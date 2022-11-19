@@ -18,6 +18,6 @@ public interface UserServices {
     UserDto getUser(Integer id);
 
     // Get All Users
-    List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers(Integer pageNo, Integer pageSize);
 
 }
