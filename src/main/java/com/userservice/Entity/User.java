@@ -1,12 +1,6 @@
 package com.userservice.Entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
-
-import com.userservice.Paylod.ContactDto;
-
 import lombok.*;
 
 @Entity
