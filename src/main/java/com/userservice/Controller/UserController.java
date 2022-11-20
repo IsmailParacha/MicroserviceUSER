@@ -1,6 +1,7 @@
 package com.userservice.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.userservice.Paylod.ApiResponse;
+import com.userservice.Paylod.ContactDto;
 import com.userservice.Paylod.UserDto;
 import com.userservice.Services.UserServices;
 
@@ -25,6 +28,8 @@ import com.userservice.Services.UserServices;
 public class UserController {
     @Autowired
     private UserServices userServices;
+    @Autowired
+    private RestTemplate restTemplate;
 
     // POST-create user
     @PostMapping("/add/")
@@ -54,13 +59,19 @@ public class UserController {
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = "2", required = false) Integer pageSize) {
         List<UserDto> users = this.userServices.getAllUsers(pageNo, pageSize);
+
         return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
     }
 
     // GET- single user get
     @GetMapping("/getUser/{id}")
     public ResponseEntity<UserDto> getSingleUsers(@PathVariable Integer id) {
-        return ResponseEntity.ok(this.userServices.getUser(id));
+        UserDto user = this.userServices.getUser(id);
+        // Set contact = this.restTemplate.getForObject(
+        // "http://localhost:8080/user/getUser/" + user.getId(),
+        // Set.class);
+        // user.setContact(contact);
+        return ResponseEntity.ok(user);
     }
 
 }
