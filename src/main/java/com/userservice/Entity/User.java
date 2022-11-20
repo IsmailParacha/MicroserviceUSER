@@ -15,6 +15,5 @@ public class User {
     private int id;
     private String name;
     private String phoneNo;
-    // private Set<ContactDto> contact = new HashSet<>();
 
 }
