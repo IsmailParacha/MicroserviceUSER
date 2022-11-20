@@ -67,10 +67,10 @@ public class UserController {
     @GetMapping("/getUser/{id}")
     public ResponseEntity<UserDto> getSingleUsers(@PathVariable Integer id) {
         UserDto user = this.userServices.getUser(id);
-        // Set contact = this.restTemplate.getForObject(
-        // "http://localhost:8080/user/getUser/" + user.getId(),
-        // Set.class);
-        // user.setContact(contact);
+        Set contact = this.restTemplate.getForObject(
+                "http://localhost:9090/Contact/GetContact/User:" + user.getId(),
+                Set.class);
+        user.setContact(contact);
         return ResponseEntity.ok(user);
     }
 
