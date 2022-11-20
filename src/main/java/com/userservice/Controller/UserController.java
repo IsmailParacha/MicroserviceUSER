@@ -51,7 +51,7 @@ public class UserController {
     // GET- multiple users get
     @GetMapping("/getUsers/")
     public ResponseEntity<List<UserDto>> getAllUsers(
-            @RequestParam(value = "pageNo", defaultValue = "1", required = false) Integer pageNo,
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = "2", required = false) Integer pageSize) {
         List<UserDto> users = this.userServices.getAllUsers(pageNo, pageSize);
         return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
